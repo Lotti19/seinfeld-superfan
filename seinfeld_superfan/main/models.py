@@ -1,7 +1,11 @@
 from django.db import models
+
 import re
+
 import bcrypt
+
 email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+PASSWORD_REGEX = re.compile(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')
 
 class UserManager(models.Manager):
     def user_validator(self, postData):
@@ -15,11 +19,23 @@ class UserManager(models.Manager):
         existing_user = User.objects.filter(email = postData['email'])
         if len(existing_user) != 0:
             errors['email'] = "Email already in use"
-        if len(postData['password']) < 8:
-            errors['password'] = "Password must be at least 8 characters"
+        if not PASSWORD_REGEX.match(postData['password']):
+            errors['password'] = 'Password must be 8 characters and contain: 1 uppercase letter, 1 lowercase letter, and 1 number. May contain special characters.'
         elif postData['password'] != postData['confirm_pw']:
             errors['password'] = "Password and Confirm Password inputs must match"
         return errors
+    
+    def authenticate(self, email, password):
+    
+        user = None
+        
+        try:
+            user = User.objects.get(email=email)
+            
+        except:
+            return False
+        
+        return bcrypt.checkpw(password.encode(), user.password.encode())
 
     def log_validator(self, postData):
         errors = {}
