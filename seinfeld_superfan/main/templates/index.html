@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>Seinfeld SuperFan</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">TBD</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/{{ user.id }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/">TBD</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/">TBD</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+<h1>Main html...all htmls will inherit from this one!</h1>
+    <div class="container">
+            <br>
+            {% block content %}
+
+            {% endblock content %}
+    </div>
+
+</body>
+</html>

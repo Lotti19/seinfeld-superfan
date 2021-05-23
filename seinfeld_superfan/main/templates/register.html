@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html lang="eng">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <title>Register for Seinfeld SuperFan</title>
-</head>
-<body>
-    <div class="welcome">
-        <h1>Welcome to Seinfeld SuperFan</h1>
-        <h3>Registration</h3>
-        <a href="/existing_user">Already Have An Account? Login Here!</a>
-    </div>
-    </div>
-    {% if messages %}
-    <ul class='messages'>
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+{% extends 'seinfeld_superfan/index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="welcome">
+    <h1>Welcome to Seinfeld SuperFan</h1>
+    <h3>Registration</h3>
+    <a href="/existing_user">Already Have An Account? Login Here!</a>
+</div>
+</div>
+{% if messages %}
+<ul class='messages'>
+    {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class='register_form'>
     <form action="/register" method="POST" style='width: 500px; margin:auto' class="register">
         {% csrf_token %}
         <label for="first_name">First Name</label>
@@ -41,4 +35,6 @@
         <br>
         <input type="submit" value="Register">
     </form>
-</body>
+</div>
+
+{% endblock content %}

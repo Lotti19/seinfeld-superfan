@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="eng">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <title>Seinfeld SuperFan Login</title>
-</head>
-<body>
-    {% if messages %}
-    <ul class='messages'>
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <div class="welcome">
-        <h1>Welcome Back, Login Here</h1>
-        <h3>Login</h3>
-        <a href="/new_user">If you are new to Seinfeld SuperFan, Sign up Here!</a>
-    </div>
+{% extends 'seinfeld_superfan/index.html' %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+<ul class='messages'>
+    {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="welcome">
+    <h1>Welcome Back, Login Here</h1>
+    <h3>Login</h3>
+    <a href="/new_user">If you are new to Seinfeld SuperFan, Sign up Here!</a>
+</div>
+<di class="loin_form">
     <form action="/login" style="width:500px; margin:auto" method="POST" class="login">
         {% csrf_token %}
         <label for="email">Email</label>
@@ -31,5 +25,6 @@
         <br>
         <input type="submit" value="Login">
     </form>
-</body>
-</html>
+</div>
+
+{% endblock content %}
