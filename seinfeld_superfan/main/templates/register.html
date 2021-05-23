@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Register for Seinfeld SuperFan</title>
+</head>
+<body>
+    <div class="welcome">
+        <h1>Welcome to Seinfeld SuperFan</h1>
+        <h3>Registration</h3>
+        <a href="/existing_user">Already Have An Account? Login Here!</a>
+    </div>
+    </div>
+    {% if messages %}
+    <ul class='messages'>
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/register" method="POST" style='width: 500px; margin:auto' class="register">
+        {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" class="form-control">
+        <br>
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" class="form-control">
+        <br>
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control">
+        <br>
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control">
+        <br>
+        <label for="confirm_password">Password Confirmation</label>
+        <input type="password" name="confirm_password" class="form-control">
+        <br>
+        <input type="submit" value="Register">
+    </form>
+</body>
