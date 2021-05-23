@@ -9,6 +9,34 @@ import bcrypt
 def index(request):
     return render(request, 'index.html')
 
+def new_user(request):
+    
+    return render(request, 'register.html')
+
+def existing_user(request):
+    
+    return render(request, 'login.html')
+
+def register(request):
+    
+    if request.method == 'GET':
+        return redirect('/new_user')
+    
+    errors = User.objects.user_validator(request.POST)
+    
+    if errors:
+        for e in errors.values():
+            messages.error(request, e)
+            
+        return redirect('/new_user')
+    
+    else:
+        new_user = User.objects.register(request.POST)
+        request.session['user_id'] = new_user.id
+        messages.success(request, 'You have successfully registered!')
+        
+        return redirect('/existing_user')
+
 def community(request):
     
     context = {
