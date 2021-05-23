@@ -1,1 +1,40 @@
-<h1>community html</h1>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Sherpa Finder Community Page</title>
+</head>
+<body>
+    <div id='write'>
+        <h2>Write a Post:</h2>
+        <form action="/post" method=POST>
+            {% csrf_token %}
+            <input type="text" name='post'>
+            <input type="submit" value="Post">
+        </form>
+    </div>
+    <div id='posts'>
+        {% for post in posts %}
+        <div class='one_post'>
+            <p class='post'>{{post.message}}</p>
+            <p class='poster'>By: <a href="/user_profile/{{post.poster.id}}">{{post.poster.first_name}} {{post.poster.last_name}}</a></p>
+            <a href="/add_like/{{post.id}}">Like Post</a>
+            <p>{{ post.user_likes.count }}</p>
+            <form action="/post_comment/{{post.id}}" method=POST>
+                {% csrf_token %}
+                Comment: <input type="text" name='comment'>
+                <input type="submit" value='submit'>
+            </form>
+            {% for comment in post.post_comments.all %}
+                <p>{{comment.comment}}</p>
+                <p>poster: {{comment.poster.first_name}} {{comment.poster.last_name}}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
