@@ -12,4 +12,5 @@ urlpatterns = [
     path('new_user', views.new_user),
     path('existing_user', views.existing_user),
     path('register', views.register),
+    path('startquiz', views.startquiz),
 ]

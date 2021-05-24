@@ -17,11 +17,15 @@ def existing_user(request):
     
     return render(request, 'login.html')
 
+def startquiz(request):
+    
+    return render(request, 'trivia.html')
+
 def register(request):
     
     if request.method == 'GET':
         return redirect('/new_user')
-    
+
     errors = User.objects.user_validator(request.POST)
     
     if errors:
