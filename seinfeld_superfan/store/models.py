@@ -1,8 +1,6 @@
-import re
-
 from django.db import models
 
-from django.db.models.fields.files import ImageField
+from django.contrib.auth.models import User
 
 from .models import User
 
