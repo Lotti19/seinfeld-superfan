@@ -8,8 +8,11 @@ email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 PASSWORD_REGEX = re.compile(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')
 
 class UserManager(models.Manager):
+    
     def user_validator(self, postData):
+        
         errors = {}
+        
         if len(postData['first_name']) < 2 or postData['first_name'].isalpha() != True:
             errors['first_name'] = 'First name must be at least 2 characters'
         if len(postData['last_name']) < 2:
@@ -38,7 +41,9 @@ class UserManager(models.Manager):
         return bcrypt.checkpw(password.encode(), user.password.encode())
 
     def log_validator(self, postData):
+        
         errors = {}
+        
         if len(postData['email']) == 0:
             errors['email'] = "Email is required"
         elif not email_regex.match(postData['email']):
