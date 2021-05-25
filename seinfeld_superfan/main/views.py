@@ -17,10 +17,6 @@ def existing_user(request):
     
     return render(request, 'login.html')
 
-def startquiz(request):
-    
-    return render(request, 'trivia.html')
-
 def register(request):
     
     if request.method == 'GET':
