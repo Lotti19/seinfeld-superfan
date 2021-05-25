@@ -1,0 +1,15 @@
+<input type='radio' name='a_{q id}' value='true'>Answer 1
+<input type='radio' name='a_{q id}' value='false'>Answer 2
+
+
+// set your events
+
+// models
+
+QuestionModel
+   text
+
+AnswerModel
+    text 
+    boolean
+    many - 1 to Question
