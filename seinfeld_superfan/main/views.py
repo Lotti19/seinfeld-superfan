@@ -115,3 +115,10 @@ def profile(request, user_id):
 
     return render(request, 'profile.html', context)
 
+def logout(request):
+    
+    request.session.clear()
+    messages.success(request, 'You have succesfully logged out')
+    
+    return redirect('/existing_user')
+

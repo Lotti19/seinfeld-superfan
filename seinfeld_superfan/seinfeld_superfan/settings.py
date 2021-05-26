@@ -128,4 +128,4 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'store/static/images')
 
-MEDIA_URL = 'store/static/images/'
+MEDIA_URL = '/images/'
