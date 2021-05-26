@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('store/', include('store.urls')),
+    path('startquiz/', include('trivia.urls')),
     path('community', views.community),
     path('post', views.post),
     path('post_success', views.post_success),

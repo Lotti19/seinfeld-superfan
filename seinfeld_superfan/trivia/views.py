@@ -4,4 +4,4 @@ from . models import *
 
 def startquiz(request):
     
-    return render(request, 'trivia.html')
+    return render(request, 'trivia/trivia.html')  
