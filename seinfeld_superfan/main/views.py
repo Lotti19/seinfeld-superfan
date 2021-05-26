@@ -36,6 +36,36 @@ def register(request):
         messages.success(request, 'You have successfully registered!')
         
         return redirect('/existing_user')
+    
+def login(request):
+    
+    if request.method == 'GET':
+        return redirect('/new_user')
+    
+    if not User.objects.authenticate(request.POST['email'], request.POST['password']):
+        messages.error(request, 'Invalid Email/Password')
+        
+        return redirect('/existing_user')
+    
+    user = User.objects.get(email=request.POST['email'])
+    request.session['user_id'] = user.id
+    messages.success(request, 'You have succesfully logged in!')
+    
+    return redirect(f'/success/{user.id}')
+
+def success(request, user_id):
+    
+    if 'user_id' not in request.session:
+        return redirect('/')
+    
+    user = User.objects.get(id=user_id)
+    
+    context = {
+        'user': user,
+        'one_user': User.objects.get(id=request.session['user_id']),
+    }
+    
+    return render(request, 'profile.html', context)
 
 def community(request):
     
@@ -73,4 +103,15 @@ def add_like(request, id):
     liked_post.user_likes.add(user_liking)
     
     return redirect('/post_success')
+
+def profile(request, user_id):
+
+    user = User.objects.get(id=user_id)
+    
+    context = {
+        'user': user,
+        'one_user': User.objects.get(id=request.session['user_id']),
+    }
+
+    return render(request, 'profile.html', context)
 

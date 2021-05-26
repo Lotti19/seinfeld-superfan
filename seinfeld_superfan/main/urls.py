@@ -13,4 +13,7 @@ urlpatterns = [
     path('new_user', views.new_user),
     path('existing_user', views.existing_user),
     path('register', views.register),
+    path('<int:user_id>', views.profile),
+    path('login', views.login),
+    path('success', views.success),
 ]
