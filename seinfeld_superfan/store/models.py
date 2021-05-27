@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Customer(models.Model):
     
-    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     
@@ -34,7 +34,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
-    #transaction_id = models.CharField(max_length=100, null=True)
+    transaction_id = models.CharField(max_length=100, null=True)
     #django YOU YOUID look up for transaction iD
     
     def __str__(self):
