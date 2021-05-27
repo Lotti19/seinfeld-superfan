@@ -13,7 +13,7 @@ def store(request):
         'products':products
     }
     
-    return render(request, 'store/store.html', context)
+    return render(request, 'store.html', context)
 
 def cart(request):
 
@@ -29,7 +29,7 @@ def cart(request):
         'items':items
         }
     
-    return render(request, 'store/cart.html', context)
+    return render(request, 'cart.html', context)
 
 def checkout(request):
     if request.user.is_authenticated:
@@ -41,7 +41,7 @@ def checkout(request):
         order = {'get_cart_total':0, 'get_cart_items':0}
 
     context = {'items':items, 'order':order}
-    return render(request, 'store/checkout.html', context)
+    return render(request, 'checkout.html', context)
 
 def updateItem(request):
     data = json.loads(request.body)
